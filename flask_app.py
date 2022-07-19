@@ -14,3 +14,7 @@ def hello_world():
 @app.route('/help')
 def help():
     return 'help'
+
+@app.route('/noeyi')
+def noeyi():
+    return 'noeyi'
