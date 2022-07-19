@@ -15,6 +15,6 @@ def hello_world():
 def help():
     return 'help'
 
-@app.route('/noey')
-def noey():
-    return 'noey'
+@app.route('/noeyi')
+def noeyi():
+    return 'noeyi'
