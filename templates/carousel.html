@@ -24,6 +24,19 @@
             </div>
             {% endfor %}
 
+            <!--
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        {% for img in dList %}
+        <div class="carousel-inner">
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}" data-bs-interval="{{img[3]}}">
+                <img src={{img[4]}} class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>{{img[1]}} </h5>
+                    <p>{{img[0]}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        -->
             <!--Button-->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                 data-bs-slide="prev">

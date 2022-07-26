@@ -43,7 +43,6 @@ def input():
     return render_template('input.html')
 
 
-'''
 @app.route("/carousel", methods=['GET', 'POST'])
 def carousel():
     inputSongName = request.form.get('inputSongName', None)
@@ -52,9 +51,9 @@ def carousel():
     link2song = get_link2lyrics(songParameters)
     lyrics = get_lyrics(link2song)
     df = returnPandasLyrics(lyrics)
-    dList = helpers(df)
+    dList = help(df)
     return render_template("carousel.html", dList=dList)
-'''
+
 
 '''
 @app.route("/result", methods=['GET', 'POST'])
@@ -69,20 +68,19 @@ def result():
 '''
 
 
-@app.route("/macsong", methods=['GET', 'POST'])
-def macsong():
-    '''
+@app.route("/main", methods=['GET', 'POST'])
+def main():
     inputSongName = request.form.get('inputSongName', None)
     inputArtistName = request.form.get('inputArtistName', None)
     songParameters = inputSongName + " " + inputArtistName
     link2song = get_link2lyrics(songParameters)
     lyrics = get_lyrics(link2song)
     df = returnPandasLyrics(lyrics)
-    dList = helpers(df)
-    '''
-    embedLink = returnEmbed('lover', 'taylor swift')
-    # embedLink = returnEmbed(inputSongName, inputArtistName)
-    return render_template("macsong.html", embedLink=embedLink)
+    dList = help(df)
+
+    embedLink = returnEmbed(inputSongName, inputArtistName)
+    #embedLink = returnEmbed(inputSongName, inputArtistName)
+    return render_template("main.html", dList=dList, embedLink=embedLink)
 
 
 @app.route('/playsbaby')

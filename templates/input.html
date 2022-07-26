@@ -1,16 +1,42 @@
-{% block head %}
-<title>Home Page</title>
-{% endblock %}
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="content-container">
-    <form action="{{ url_for('carousel') }}" method="post">
-        <h2>Input Song:</h2>
-        <input type="text" class="name-input name mb-3" id="inputSongName" name="inputSongName" placeholder="Song Name">
-        <input type="text" class="name-input name mb-3" id="inputArtistName" name="inputArtistName"
-            placeholder="Artist Name">
-        <input class="btn btn-outline-primary" type="submit" value="Submit">
-    </form>
-</div>
+<head>
+    <meta name="'viewport" content="width=device-width" , initial-scale="1.0">
+    <title>Karaoki-fy</title>
+    <link rel="Stylesheet" href="templates/style.css">
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+</head>
 
-{% endblock %}
+<body>
+    <div class="big">
+        <!--background video imported as mp4-->
+        <video autoplay loop muted plays-inline class="sendback">
+            <source src="images/video.mp4" type="video/mp4">
+        </video>
+
+        <nav>
+            <!--top left logo-->
+            <img src="images/logo.png" class="logo">
+            <ul>
+                <!--navigate to home, mongkol, about us-->
+                <li><a href="proj.html">HOME</a></li>
+                <!--1st page (searching page)-->
+                <li><a href="aboutus.html">ABOUT US</a></li>
+            </ul>
+        </nav>
+        <div class="header">
+            <form action="{{ url_for('main') }}" method="post">
+                <!--song page-->
+                <h1>Karaoki-fy</h1>
+                <input type="text" class="search-field song" id="inputSongName" name="inputSongName"
+                    placeholder="Song Name">
+                <input type="text" class="search-field artist" id="inputArtistName" name="inputArtistName"
+                    placeholder="Artist Name">
+                <button class="search-btn" type="submit">let's go!</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

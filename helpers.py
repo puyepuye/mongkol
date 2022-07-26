@@ -147,6 +147,7 @@ def returnPandasLyrics(lyrics):
         lyrics = line[10:]
         df.loc[len(df.index)] = [timeStamp, lyrics]
     return(df)
+    print(df)
 
 
 def change_timeStamp(df):
@@ -186,7 +187,6 @@ def get_carouselSleep(df):
 def delete_null(df):
     df = df.replace(r'^\s*$', "Instrumentals", regex=True)
     return(df)
-    print("finish deleting null values")
 
 
 def find_imageSRC(df):
@@ -205,21 +205,22 @@ def find_imageSRC(df):
     return(df)
 
 
-def helpers(df):
+def help(df):
+    df = delete_null(df)
     df = change_timeStamp(df)
     df = get_carouselSleep(df)
-    df = delete_null(df)
     df = find_imageSRC(df)
     dList = df.values.tolist()
     return(dList)
 
 
 '''
-link2song = get_link2lyrics('as it was harry styles')
+link2song = get_link2lyrics('taylor swift')
 lyrics = get_lyrics(link2song)
 df = returnPandasLyrics(lyrics)
-dList = helpers(df)
-print(df)
+dList = help(df)
+# print(lyrics)
+# print(df)
 print(dList)
 '''
 
@@ -229,6 +230,8 @@ print(dList)
 #3 - sleep
 #4 - src
 
+'''
 embedLink = returnEmbed('as it was', 'harry styles')
 print(embedLink)
 print(type(embedLink))
+'''

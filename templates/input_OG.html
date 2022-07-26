@@ -1,0 +1,16 @@
+{% block head %}
+<title>Home Page</title>
+{% endblock %}
+{% block body %}
+
+<div class="content-container">
+    <form action="{{ url_for('main') }}" method="post">
+        <h2>Input Song:</h2>
+        <input type="text" class="name-input name mb-3" id="inputSongName" name="inputSongName" placeholder="Song Name">
+        <input type="text" class="name-input name mb-3" id="inputArtistName" name="inputArtistName"
+            placeholder="Artist Name">
+        <input class="btn btn-outline-primary" type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}
