@@ -69,8 +69,8 @@ def result():
 '''
 
 
-@app.route("/websdk", methods=['GET', 'POST'])
-def websdk():
+@app.route("/macsong", methods=['GET', 'POST'])
+def macsong():
     '''
     inputSongName = request.form.get('inputSongName', None)
     inputArtistName = request.form.get('inputArtistName', None)
@@ -80,9 +80,9 @@ def websdk():
     df = returnPandasLyrics(lyrics)
     dList = helpers(df)
     '''
-    embedLink = returnEmbed('lover', 'taylor swift')
+    URI = returnEmbed('lover', 'taylor swift')
     # embedLink = returnEmbed(inputSongName, inputArtistName)
-    return render_template("websdk.html", embedLink=embedLink)
+    return render_template("macsong.html", URI=URI)
 
 
 @app.route('/playsbaby')
