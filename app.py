@@ -83,3 +83,8 @@ def websdk():
     embedLink = returnEmbed('lover', 'taylor swift')
     # embedLink = returnEmbed(inputSongName, inputArtistName)
     return render_template("websdk.html", embedLink=embedLink)
+
+
+@app.route('/playsbaby')
+def playsbaby():
+    return render_template("playsbaby.html")
