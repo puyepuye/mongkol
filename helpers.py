@@ -231,3 +231,4 @@ print(dList)
 
 embedLink = returnEmbed('as it was', 'harry styles')
 print(embedLink)
+print(type(embedLink))
