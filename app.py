@@ -80,9 +80,9 @@ def macsong():
     df = returnPandasLyrics(lyrics)
     dList = helpers(df)
     '''
-    URI = returnEmbed('lover', 'taylor swift')
+    embedLink = returnEmbed('lover', 'taylor swift')
     # embedLink = returnEmbed(inputSongName, inputArtistName)
-    return render_template("macsong.html", URI=URI)
+    return render_template("macsong.html", embedLink=embedLink)
 
 
 @app.route('/playsbaby')

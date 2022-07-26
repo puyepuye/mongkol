@@ -21,8 +21,9 @@
       'user-modify-playback-state'
     ];
 
-    const URI = {{ URI }};
-    console.log(`${URI}`);
+    var URI = '{{embedLink}}';
+    //console.log(`${URI}`);
+    console.log(URI);
 
     // If there is no token, redirect to Spotify authorization
 
@@ -68,7 +69,8 @@
       $.ajax({
         url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
         type: "PUT",
-        data: '{"uris": [`${URI}`]}',
+        //URI = spotify:track:1dGr1c8CrMLDpV6mPbImSI
+        data: '{"uris": ' + URI + '}',//["spotify:track:1dGr1c8CrMLDpV6mPbImSI"]}',
         beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'Bearer ' + _token); },
         success: function (data) {
           console.log('It plays?');
