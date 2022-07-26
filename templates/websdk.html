@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spotify Web Playback SDK Quick Start</title>
+</head>
+
+<body>
+    <!--<h1>Spotify Web Playback SDK Quick Start</h1>-->
+    <!-- Load the Spotify Web Playback SDK -->
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+
+        // Called when the Spotify Web Playback SDK is ready to use
+
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            // Define the Spotify Connect device, getOAuthToken has an actual token 
+            // hardcoded for the sake of simplicity
+            var player = new Spotify.Player({
+                name: 'A Spotify Web SDK Player',
+                getOAuthToken: callback => {
+                    callback('BQDM8mWvoRPG-OLCqx5YGJuRqoJvLOlObyJz--f81Fai26dMrzj_2hMTHPwnzH2hN375kxSdzwsU7UhzeJUQEWsQV1Gubfr231QpglzqLU3UqNuLdG7YSMG5OpA_JXP33SpRhyMVekiIZS6fmmme2rZKcksyTFc5x67R1G6wXGP5bJKmL-INs5xaatRlQqea9-Na_DQ9vZWkOfzRcC-xM6g');
+                },
+                volume: 0.5
+            });
+            // Called when connected to the player created beforehand successfully
+
+            player.addListener('ready', ({ device_id }) => {
+                console.log('Ready with Device ID', device_id);
+                var embedLink = {{ embedLink| tojson
+            }}
+        const play = ({
+            spotify_uri,
+            playerInstance: {
+                _options: {
+                    getOAuthToken,
+                    id
+                }
+            }
+        }) => {
+            getOAuthToken(access_token => {
+                fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ uris: [spotify_uri] }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${access_token}`
+                    },
+                });
+            });
+        };
+        play({
+            playerInstance: player,
+            //PUYE PUT JINJA HERE  B====
+            spotify_uri: embedLink,
+            //spotify_uri: 'spotify:track:7xGfFoTpQ2E7fRF5lN10tr',
+        });
+
+            });
+        // Connect to the player created beforehand, this is equivalent to 
+        // creating a new device which will be visible for Spotify Connect
+        player.connect();
+
+
+        };
+        function playbackcontrol() {
+            player.togglePlay().then(() => {
+                console.log('Toggled playback!');
+            });
+        }
+    </script>
+    <!--
+    <button id="playback-control" onclick="player.togglePlay().then(() => {
+    console.log('Toggled playback!');
+  });">-->
+    </button>
+</body>
+
+</html>
