@@ -1,4 +1,0 @@
-!pip install selenium
-!apt-get update 
-!apt install chromium-chromedriver
-!pip install botnoi==0.2.1
