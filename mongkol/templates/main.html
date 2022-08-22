@@ -1,0 +1,191 @@
+<!--current MAIN-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web SDK</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+
+        // Set token
+        //grab token here: https://developer.spotify.com/documentation/web-playback-sdk/quick-start/#
+        let _token = 'BQDjA5mPOUpa-_y3Xkr_Q9SkICygjBaT-mYAlfIpuru2CIkmvQEjD_L6-uxm6hxD0ODWdQZm7JLFzSNyQ_Nj9YP_tjFSm6tWO2_nYLsUn4sMhPSj9AyZuVWDLOH5m7t5M0ykCodo21imaUXRdY71jHjmEML39hHniBkEtz7T33neYfuf6964ka4YvuvN9M_tjxZBHg8m9oJlu9TxXyG2Xv0';
+        // Replace with your app's client ID, redirect URI and desired scopes
+        const clientId = '2102d6bf57714410a8f50dd1ccadc571';
+        const redirectUri = 'https://spotify-web-playback.glitch.me';
+        const scopes = [
+            'streaming',
+            'user-read-birthdate',
+            'user-read-private',
+            'user-modify-playback-state'
+        ];
+
+        var URI = "{{embedLink}}";
+        //console.log(`${URI}`);
+        console.log(URI);
+        var request_link = '{"uris": ["' + URI + '"]}'
+        console.log(request_link);
+
+        // If there is no token, redirect to Spotify authorization
+
+        // Set up the Web Playback SDK
+
+
+        window.onSpotifyPlayerAPIReady = () => {
+
+            const player = new Spotify.Player({
+                name: 'Web Playback SDK Template',
+                getOAuthToken: cb => { cb(_token); }
+            });
+
+            // Error handling
+            player.on('initialization_error', e => console.error(e));
+            player.on('authentication_error', e => console.error(e));
+            player.on('account_error', e => console.error(e));
+            player.on('playback_error', e => console.error(e));
+
+            // Playback status updates
+            player.on('player_state_changed', state => {
+                console.log(state)
+
+                $('#current-track-name').text(state.track_window.current_track.name);
+            });
+
+            // Ready
+            player.on('ready', data => {
+                console.log('Ready with Device ID', data.device_id);
+                play(data.device_id);
+                $('#carouselExampleInterval').carousel();
+                // Play a track using our new device ID
+            });
+
+            // Connect to the player!
+            player.connect();
+
+        }
+
+        // Play a specified track on the Web Playback SDK's device ID
+        function play(device_id) {
+            $.ajax({
+                url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
+                type: "PUT",
+                //URI = spotify:track:1dGr1c8CrMLDpV6mPbImSI
+                //data: request_link,//["spotify:track:1dGr1c8CrMLDpV6mPbImSI"]}',
+                //data: '{"uris": '["spotify:track:1dGr1c8CrMLDpV6mPbImSI"]},
+                data: request_link,
+                beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', 'Bearer ' + _token); },
+                success: function (data) {
+                    console.log('It plays?');
+                    console.log(data)
+                }
+            });
+            //alert('song playing baby');
+        }
+
+    </script>
+    <style>
+        .container {
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+            padding-top: 5vh;
+            width: 200px;
+            height: 90vh;
+        }
+
+        .carousel,
+        .carousel-item,
+        .carousel-item.active {
+            height: 100%;
+        }
+
+        .carousel-inner {
+            height: 100%;
+        }
+
+        p {
+            font-weight: bold;
+            font-size: 2em;
+        }
+
+        .word {
+            position: relative;
+            white-space: nowrap;
+            color: whitesmoke;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 1);
+        }
+
+        .word::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: blue;
+            overflow: hidden;
+            width: 100%;
+            animation: run-text 2s;
+            text-shadow: 0 0 3px rgba(255, 255, 255, 1);
+        }
+
+        @keyframes run-text {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        h5 {
+            background-color: black;
+        }
+
+        p {
+            background-color: black;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+        <h3 id="current-track-name"></h3>
+
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            {% for img in dList %}
+            <div class="carousel-inner">
+                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}" data-bs-interval="{{img[3]}}">
+                    <img src={{img[4]}} class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{img[0]}} </h5>
+                        <p>{{img[1]}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!--
+    <div id="da-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      {% for img in dList %}
+      <div class="carousel-inner">
+        <img src={{img[4]}} class="d-block w-100 carousel-item {% if loop.index == 1 %}active{% endif %}" alt="..."
+          data-bs-interval="{{img[3]}}">
+        <div class="carousel-caption d-none d-md-block">
+          <p>
+            <span data-text={{img[1]}} class="word">{{img[1]}}</span>
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div> 
+  -->
+            </div>
+</body>
+
+</html>
