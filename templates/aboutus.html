@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/abtusstyle.css') }}">
+        <title>about us</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="content">
+                    <img src="images/noey.jpg" alt="">
+                    <h3>Panisara Yimcharoen (Noey)</h3>
+                    <p>KMIDS Grade12</p>
+                    <a href="https://www.instagram.com/nyp___xo/">Instagram</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="content">
+                    <img src="images/mac.jpg" alt="">
+                    <h3>Thitiwut Pattanasuttinont (Mac)</h3>
+                    <p>KMIDS Grade12</p>
+                    <a href="https://www.instagram.com/mac.thitiwut/">Instagram</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="content">
+                    <img src="images/puye.jpg" alt="">
+                    <h3>Sataphon Obra (Puyefang)</h3>
+                    <p>KMIDS Grade12</p>
+                    <a href="https://www.instagram.com/so.puye/">Instagram</a>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="./vanilla-tilt.js"></script>
+        <script type="text/javascript">
+            VanillaTilt.init(document.querySelectorAll(".card"), {
+                max: 25,
+                speed: 400,
+                glare: true,
+                "max-glare": 1
+            });
+        </script>
+    </body>
+</html>
